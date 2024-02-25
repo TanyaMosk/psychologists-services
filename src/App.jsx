@@ -1,27 +1,34 @@
 import { Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import FirstPage from 'pages/FirstPage/FirstPage';
-import SecondPage from 'pages/SecondPage/SecondPage';
-import HalfPage from 'pages/HalfPage/HalfPage';
-import ErrorPage from 'pages/ErrorPage/ErrorPage';
-import { AppWrapper } from './App.styled';
+// import { AppWrapper } from './App.styled';
+import { GlobalStyles } from './styles/GlobalStyles';
 
-const test = import.meta.env.VITE_API_TEST;
+// const test = import.meta.env.VITE_API_TEST;
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const PsychologistsPage = lazy(() =>
+  import('./pages/PsychologistsPage/PsychologistsPage')
+);
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage/FavoritesPage'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage/ErrorPage'));
 
 function App() {
-  console.log(test);
+  // console.log(test);
   return (
-    <AppWrapper>
+    <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/first" element={<FirstPage />} />
-          <Route path="/second" element={<SecondPage />}>
-            <Route path=":half" element={<HalfPage />} />
-          </Route>
+          <Route index element={<HomePage />} />
+          <Route path="/psychologists" element={<PsychologistsPage />} />
+          {/* <Route path=":half" element={<HalfPage />} />
+          </Route> */}
+          <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
-    </AppWrapper>
+      <GlobalStyles />
+    </>
   );
 }
 export default App;

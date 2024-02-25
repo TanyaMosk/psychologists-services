@@ -1,0 +1,46 @@
+import { createGlobalStyle } from 'styled-components';
+import 'modern-normalize';
+// import { globalColor } from './root';
+
+export const GlobalStyles = createGlobalStyle`
+    body {
+  /* background-color: #000; */
+  /* background-image: url('./assets/background.png'); */
+  background-size: auto 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  font-family:  "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #111111;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  background-color: #f3f3f3;
+  
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+img {
+  display: block;
+}
+button {
+  cursor: pointer;
+}
+
+`;
