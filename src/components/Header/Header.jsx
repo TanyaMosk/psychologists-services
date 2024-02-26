@@ -6,9 +6,29 @@
 // } from './Header.styled';
 // import sprite from 'assets/sprite.svg';
 
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { BasicModalWindom } from '../BasicModalWindom/BasicModalWindom';
+import { LogInModal } from '../LogInModal/LogInModal';
+import { RegistrationModal } from '../RegistrationModal/RegistrationModal';
 
 export const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRegis, setIsOpenRegis] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    if (isOpen) setIsOpen(false);
+    if (isOpenRegis) setIsOpenRegis(false);
+  };
+
+  const handleOpenModalRegis = () => {
+    setIsOpenRegis(true);
+  };
+
   return (
     <header>
       <NavLink to="/">
@@ -21,25 +41,26 @@ export const Header = () => {
         <NavLink to="/favorites">Favorites</NavLink>
       </div>
       <div>
-        <button type="button">Log In</button>
-        <button type="button">Registration</button>
+        <button type="button" onClick={handleOpenModal}>
+          Log In
+        </button>
+        <button type="button" onClick={handleOpenModalRegis}>
+          Registration
+        </button>
       </div>
+      {isOpen && (
+        <BasicModalWindom isOpen={isOpen} onRequestClose={handleCloseModal}>
+          <LogInModal />
+        </BasicModalWindom>
+      )}
+      {isOpenRegis && (
+        <BasicModalWindom
+          isOpen={isOpenRegis}
+          onRequestClose={handleCloseModal}
+        >
+          <RegistrationModal />
+        </BasicModalWindom>
+      )}
     </header>
-    // <HeaderContainer>
-    //   <Navigation>
-    //     <StyledLink to="/first">
-    //       <IconWrapper>
-    //         <use href={`${sprite}#icon-logo`} />
-    //       </IconWrapper>
-    //       First
-    //     </StyledLink>
-    //     <StyledLink to="/second">
-    //       <IconWrapper>
-    //         <use href={`${sprite}#icon-logo`} />
-    //       </IconWrapper>
-    //       Second
-    //     </StyledLink>
-    //   </Navigation>
-    // </HeaderContainer>
   );
 };
